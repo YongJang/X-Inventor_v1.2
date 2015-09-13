@@ -61,19 +61,28 @@ $(document).ready(function(){
             greedy: true,
             drop:function(event,ui){
                 var objID = $(ui.draggable).attr("id");
-                tempOutID = objID; //임시 
-                tempInID = $(this).attr("id");          //임시
-                
+                tempOutID = objID;       //실험코드
+                tempInID = $(this).attr("id");           //실험코드
+                tempInID = tempInID.substring(5,tempInID.length);  //실험코드
+               
                 if($(ui.draggable).hasClass('output')){ // input Item에 드롭 되는 item이 output일 때
                     if($(ui.draggable).hasClass('outputItem')){ // (output drop case 3/4) = 보드에 있던 outputItem이 inputItem으로 드롭될 때
                         $(ui.draggable).addClass('outputContain').detach('.board').appendTo(this);
                         $('.outputContain').css({'left':0,'top':0});        // 알수 없는 오류로 left랑 top에 이상한 값이 들어가서 0으로 재설정함
+                        tempOutID = tempOutID.substring(6,tempOutID.length);    //실험코드
                     }else if(!$(ui.draggable).hasClass('outputItem')){  // (output drop case 4/4) = 아이템 리스트에 있던 output이 inputItem으로 바로 드롭될 때
                         object = createObjByID(objID);
                         object.draw();
                         outputArr[object.getID()] = object;
                         $(document).find('#output'+object.getID()).detach().addClass('outputContain').appendTo(this);
+                        tempOutID = object.getID();  //실험코드
                     }
+                    inputArr[tempInID].outputList.push(outputArr[tempOutID]);    //실험코드
+                    str="";                         //실험코드
+                    for(var i =0; i<inputArr[tempInID].outputList.length;i++){//실험코드
+                        str+=inputArr[tempInID].outputList[i].text+"/"+inputArr[tempInID].outputList[i].getID()+"  ";//실험코드
+                    }                               //실험코드
+                    prompt(str);                    //실험코드
                 }
             }
         });
