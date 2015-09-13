@@ -129,7 +129,7 @@ function InputItem(){
 			};
 			this.outputList = new Array();
             this.draw = function(){
-                 $("#draw").append("<div id = 'input' class='item inputItem'><label id = '"+this.id+"'>"+this.text+"</label></div>");
+                 $("#draw").append("<div id = 'input'"+this.id+" class='item inputItem'><label>"+this.text+"</label></div>");
             };
 	};
 	

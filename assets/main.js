@@ -18,7 +18,7 @@ $(document).ready(function(){
 	//Droppable setting
 	$('.garbage, .sidebar').droppable({
 		greedy: true,
-		accept: ".outputContent, .inputContent",
+		accept: ".outputItem, .inputItem",
 		tolerance:"touch",
 		drop:function(event, ui){
 			$(ui.draggable).remove();			
@@ -28,7 +28,11 @@ $(document).ready(function(){
 /*    function drawDiv(content){
          $('#draw').append(drawInput(++sel, content));
     }*/
-   /* $(document).on("click",)*/
+    $(document).on("mouseover","[id^='input']",function(){  // id가 input으로 시작하는 모든 엘리먼트들에게 mouseover이 발생했을 때 실시간으로 draggable 속성 부여
+        $(this).draggable({
+            containment : 'document'
+        });
+    });
     
 	$('.board').droppable({
 		greedy: true,
