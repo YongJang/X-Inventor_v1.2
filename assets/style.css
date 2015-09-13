@@ -87,7 +87,7 @@ body{font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-si
 	background-color: #f0ad4e;
 }
 
-.inputContent{
+.inputItem{
 	min-width:150px;
 	min-height:50px;
 	width: auto;
@@ -101,7 +101,7 @@ body{font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-si
 	margin: 5px;
 	box-shadow: 3px 3px 10px #000000;
 }
-.outputContent{
+.outputItem{
 	width: 150px;
 	height: 50px;
 	border-radius: 5px;
