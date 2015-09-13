@@ -158,9 +158,35 @@ function createObjByID(ID){	//
                 }
 				object.setID(inputNum++);
 			}else{	// output Item 생성
-				object = new Brightness();	// 임시
-				object.prototype = new InputItem();
-				//object.setID(inputNum++);
+                if(ID == "O0"){
+                    Speaker.prototype = new OutputItem();
+                    object = new Speaker();
+                }else if(ID == "O1"){
+                    Movement.prototype = new OutputItem();
+                    object = new Movement();
+                }else if(ID == "O2"){
+                    Light.prototype = new OutputItem();
+                    object = new Light();
+                }else if(ID == "O3"){
+                    Vibration.prototype = new OutputItem();
+                    object = new Vibration();
+                }else if(ID == "O4"){
+                    SaveData.prototype = new OutputItem();
+                    object = new SaveData();
+                }else if(ID == "O5"){
+                    HA.prototype = new OutputItem();
+                    object = new HA();
+                }else if(ID == "O6"){
+                    Waterpump.prototype = new OutputItem();
+                    object = new Waterpump();
+                }else if(ID == "O7"){
+                    Display.prototype = new OutputItem();
+                    object = new Display();
+                }else{
+                    Heater.prototype = new OutputItem();
+                    object = new Heater();
+                }
+				object.setID(outputNum++);
 			}
 		}else{return ""}	// error
 		return object;
@@ -186,6 +212,7 @@ function InputItem(){
 	function OutputItem(){
 		this.InputItem = new Object();
 		this.id=0;
+        this.text="default";
 		this.getID = function(){
 			return this.id;
 		};
@@ -193,7 +220,12 @@ function InputItem(){
 			this.id = id;
 		};
 		this.savedClass; 
+        this.draw = function(){
+                $("#draw").append("<div id = 'output"+this.id+"'  class='item outputItem'><label>"+this.text+"</label></div>");
+        };
 	};
+
+inputArr = new Array(); // InputItem 클래스들을 저장할 배열
 	
 ///////////////////////////INPUT///////////////////////////////////
 	function Brightness(){
@@ -245,20 +277,30 @@ function InputItem(){
 	};
 	///////////////////////////////////////OUTPUT/////////////////////////////////////////
 	function Speaker(){
-		this.draw = function(){
-			return "<div id = 'outputID"+this.id+"' class='outputItem'> Speaker</div>";
-		};
+		this.text = "Speaker"
 	};
 	function Movement(){
-		this.draw = function(){
-			return "<div id = 'outputID"+this.id+"' class='outputItem'> Movement</div>";
-		};
+		this.text = "Movement"
 	};
-	function Light(){};
-	function Vibration(){};
-	function SaveData(){};
-	function HA(){};
-	function Waterpump(){};
-	function Display(){};
-	function Heater(){};
+	function Light(){
+        this.text = "Light"
+    };
+	function Vibration(){
+        this.text = "Vibration"
+    };
+	function SaveData(){
+        this.text = "SaveData"
+    };
+	function HA(){
+        this.text = "HA"
+    };
+	function Waterpump(){
+        this.text = "Waterpump"
+    };
+	function Display(){
+        this.text = "Display"
+    };
+	function Heater(){
+        this.text = "Heater"
+    };
 //////////////////////////////////////////////////////////////////////////////////////////
