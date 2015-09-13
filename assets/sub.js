@@ -226,6 +226,7 @@ function InputItem(){
 	};
 
 inputArr = new Array(); // InputItem 클래스들을 저장할 배열
+outputArr = new Array();    // OutputItem 클래스들을 저장할 배열
 	
 ///////////////////////////INPUT///////////////////////////////////
 	function Brightness(){
