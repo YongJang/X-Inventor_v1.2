@@ -5,7 +5,7 @@ function sizeSet(){
 	var widthG = $('.col-md-8').css('width').replace(/[^-\d\.]/g, '');
 	var heightG = $('.board').css('height').replace(/[^-\d\.]/g, '');
     var drawWidth = $('.board').css('width').replace(/[^-\d\.]/g, '');
-    $('.board').css('height', height);
+    $('.board').css({'height': height});
     $('#draw').css({'width' : drawWidth, 'height' : height});
 	$('.garbage').css({'width' : widthG, 'left' : colWidth+'px'});
 	$('.process').css({'top' : height-100+'px'});
@@ -29,7 +29,7 @@ function drawOutput(num, text){
     return "<div id = 'output' class='outputContent "+num+"'><label id = '"+num+"'>"+text+"</label></div>";
 }
 //////////////////////////////////////////////////////////////
-
+    
 ///////////////////////////////////////////////////////////////
 //mouse 좌표 인식 함수 // ///////////////////////////////////////
 var mouseX;     //전체 document에서의 위치
@@ -46,6 +46,8 @@ $(document).on('mousemove', '.item', function(event,position){
 		mouseBoxY=event.pageY-offset.top;
 });
 //////////////////////////////////////////////////////////////
+    
+
 
 
 
@@ -177,7 +179,7 @@ function InputItem(){
 			};
 			this.outputList = new Array();
             this.draw = function(){
-                 $("#draw").append("<div id = 'input'"+this.id+" class='item inputItem'><label>"+this.text+"</label></div>");
+                 $("#draw").append("<div id = 'input"+this.id+"'  class='item inputItem'><label>"+this.text+"</label></div>");
             };
 	};
 	
