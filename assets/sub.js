@@ -205,7 +205,7 @@ function InputItem(){
 			};
 			this.outputList = new Array();
             this.draw = function(){
-                 $("#draw").append("<div id = 'input"+this.id+"'  class='item inputItem'><label>"+this.text+"</label></div>");
+                 $("#draw").append("<div id = 'input"+this.id+"'  class='item intput inputItem'><label>"+this.text+"</label></div>");
             };
 	};
 	
@@ -221,7 +221,7 @@ function InputItem(){
 		};
 		this.savedClass; 
         this.draw = function(){
-                $("#draw").append("<div id = 'output"+this.id+"'  class='item outputItem'><label>"+this.text+"</label></div>");
+                $("#draw").append("<div id = 'output"+this.id+"'  class='item output outputItem'><label>"+this.text+"</label></div>");
         };
 	};
 

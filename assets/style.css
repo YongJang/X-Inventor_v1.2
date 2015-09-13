@@ -159,3 +159,8 @@ body{font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-si
 	display:block;
 	box-shadow: 3px 3px 10px #000000;
 }
+.outputContain{
+    left:0;
+    top:0;
+    position:relative;
+}

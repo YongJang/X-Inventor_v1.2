@@ -26,7 +26,7 @@ $(document).ready(function(){
 	});
 
 
-    $(document).on("mouseover","[id^='input'],[id^='output']",function(){  // id가 input으로 시작하는 모든 엘리먼트들에게 mouseover이 발생했을 때 실시간으로 draggable 속성 부여
+    $(document).on("mouseenter","[id^='input'],[id^='output']",function(){  // id가 input이나 output으로 시작하는 모든 엘리먼트들에게 mouseover이 발생했을 때 실시간으로 draggable 속성 부여
         $(this).draggable({
             containment:'document',
             snap: $(this),
@@ -56,8 +56,27 @@ $(document).ready(function(){
             },
             stack:".board"
         });
+        $("[id^='input']").droppable({   // input Item 드롭 이벤트
+            accept: '.output',
+            greedy: true,
+            tolerance: "touch",
+            drop:function(event,ui){
+                var objID = $(ui.draggable).attr("id");
+                
+                if($(ui.draggable).hasClass('output')){ // input Item에 드롭 되는 item이 output일 때
+                    if($(ui.draggable).hasClass('outputItem')){ // (output drop case 3/4) = 보드에 있던 outputItem이 inputItem으로 드롭될 때
+                        tempID = $(ui.draggable).attr("id");
+                        $(ui.draggable).addClass('outputContain').detach('.board').appendTo(this);
+                        $('.outputContain').css({'left':0,'top':0});        // 알수 없는 오류로 left랑 top에 이상한 값이 들어가서 0으로 재설정함
+                    }else if(!$(ui.draggable).hasClass('outputItem')){  // (output drop case 4/4) = 아이템 리스트에 있던 output이 inputItem으로 바로 드롭될 때
+                        object = createObjByID(objID);
+                        object.draw();
+                        $(document).find('#output'+object.getID()).detach().addClass('outputContain').appendTo(this);
+                    }
+                }
+            }
+        });
     });
-    
     
     
 	$('.board').droppable({        // 보드 드롭 이벤트
@@ -80,13 +99,17 @@ $(document).ready(function(){
                     object.draw();
                     $(document).find('#output'+object.getID()).css({'left':(mouseX-mouseBoxX)+'px', 'top':mouseY-mouseBoxY+'px'});
                 }else if($(ui.draggable).hasClass('outputContain')){   // (output drop case 2/4) = InputItem 내부의 outputItem이 보드로 드롭될 때
-                    $(ui.draggable).detach().css({'left':(mouseX-mouseBoxX)+'px', 'top':mouseY-mouseBoxY+'px'}).appendTo(this);
+                    $(ui.draggable).detach().appendTo('#draw');
                     $(ui.draggable).removeClass('outputContain');
+                    //mouseBoxX와 mouseBoxY 좌표를 재설정 할 필요 있어서 뺐음
+                    $(ui.draggable).css({'left':(mouseX)+'px', 'top':mouseY+'px'});
                 }
             }
             
         }
 	});
+    
+    
 	
 	$('.process').on('click', function(){
 		var $btn = $(this).button('loading');
