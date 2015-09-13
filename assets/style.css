@@ -110,9 +110,8 @@ body{font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-si
 	vertical-align:center;
 	padding: 5px;
 	margin: 5px;
-	display:block;
+	position:fixed;
 	box-shadow: 3px 3px 10px #000000;
-	z-index: 1;
 }
 .detailContent{
 	padding: 5px;
