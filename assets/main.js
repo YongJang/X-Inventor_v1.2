@@ -39,8 +39,10 @@ $(document).ready(function(){
 		drop:function(event, ui){
             var content = $(ui.draggable).text();
             var objID = $(ui.draggable).attr("id"); // drag 되는 대상(index.html의 li 엘리먼트 ID)의 id를 변수 objID에 저장
-            object = createObjByID(objID);  // createObjByID 에게 drag 되는 대상의 id를 매개변수로 넘겨주고 그 대상을 객체화 하여 object라는 변수에 저장
-            object.draw();                  // 객체를 보드 상에 그리는 함수
+            if(!$(ui.draggable).hasClass('inputItem')){ // 이미 보드에 드롭되어 있는 엘리먼트라면 또 다시 보드에 드롭되어 객체가 생성되지 못하게끔 예외로 처리
+                object = createObjByID(objID);  // createObjByID 에게 drag 되는 대상의 id를 매개변수로 넘겨주고 그 대상을 객체화 하여 object라는 변수에 저장
+                object.draw();                  // 객체를 보드 상에 그리는 함수
+            }
             
             var num = $('.inputContent').children('label').attr('id');
             if(num === String(sel)){
