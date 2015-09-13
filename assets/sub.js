@@ -89,6 +89,9 @@ function detailOutPrint(text){
     }
 }
 
+inputNum = 0;   //input+inputNum = input객체의 ID
+outputNum = 0;  //output+outputNum = output객체의 ID
+
 // ID 값을 매개변수로 받으면 오브젝트를 생성하는 함수
 function createObjByID(ID){	//
 		var object;
@@ -100,13 +103,41 @@ function createObjByID(ID){	//
 				if(ID == "I0"){		// Brightness
                     Brightness.prototype = new InputItem();
 					object = new Brightness();
-                    
-				}else{		// Length
+				}else if(ID == "I1"){		// Length
                     Length.prototype = new InputItem();
 					object = new Length();
-				}
-            
-				//object.setID(inputNum++);
+				}else if(ID == "I2"){
+                    Compass.prototype = new InputItem();
+                    object = new Compass();
+                }else if(ID == "I3"){
+                    Heartbeat.prototype = new InputItem();
+                    object = new Heartbeat();
+                }else if(ID == "I4"){
+                    Sound.prototype = new InputItem();
+                    object = new Sound();
+                }else if(ID == "I5"){
+                    Time.prototype = new InputItem();
+                    object = new Time();
+                }else if(ID == "I6"){
+                    Rotation.prototype = new InputItem();
+                    object = new Rotation();
+                }else if(ID == "I7"){
+                    Color.prototype = new InputItem();
+                    object = new Color();
+                }else if(ID == "I8"){
+                    Acceleration.prototype = new InputItem();
+                    object = new Acceleration();
+                }else if(ID == "I9"){
+                    Slope.prototype = new InputItem();
+                    object = new Slope();
+                }else if(ID == "I10"){
+                    Humidity.prototype = new InputItem();
+                    object = new Humidity();
+                }else{
+                    Temperature.prototype = new InputItem();
+                    object = new Temperature();
+                }
+				object.setID(inputNum++);
 			}else{	// output Item 생성
 				object = new Brightness();	// 임시
 				object.prototype = new InputItem();
@@ -160,58 +191,38 @@ function InputItem(){
 	};
 	
 	function Compass(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem item'> Compass</div>";
-		};
+		this.text = "Compass";
 	};
 	
 	function Heartbeat(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem item'> Heartbeat</div>";
-		};
+		this.text = "Heartbeat";
 	};
 	
 	function Sound(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem item'> Sound</div>";
-		};
+		this.text = "Sound";
 	};
 	
 	function Time(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem item'> Time</div>";
-		};
+		this.text = "Time";
 	};
 	
 	function Rotation(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem item'> Rotation</div>";
-		};
+		this.text = "Rotation";
 	};
 	function Color(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem item'> Color</div>";
-		};
+		this.text = "Color";
 	};
 	function Slope(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem'> Slope</div>";
-		};
+		this.text = "Slope";
 	};
 	function Acceleration(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem'> Acceleration</div>";
-		};
+		this.text = "Acceleration";
 	};
 	function Humidity(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem'> Humidity</div>";
-		};
+		this.text = "Humidity";
 	};
 	function Temperature(){
-		this.draw = function(){
-			return "<div id='inputID"+this.id+"' class='inputItem'> Temperature</div>";
-		};
+		this.text = "Temperature";
 	};
 	///////////////////////////////////////OUTPUT/////////////////////////////////////////
 	function Speaker(){
