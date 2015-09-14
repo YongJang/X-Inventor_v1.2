@@ -1,24 +1,41 @@
+var addEvent = function(object, type, callback) {
+    if (object == null || typeof(object) == 'undefined') return;
+    if (object.addEventListener) {
+        object.addEventListener(type, callback, false);
+    } else if (object.attachEvent) {
+        object.attachEvent("on" + type, callback);
+    } else {
+        object["on"+type] = callback;
+    }
+};
 function sizeSet(){
     var height = $(window).height();
-	var width = $(window).width();
-	var colWidth = $('.col-md-2').css('width').replace(/[^-\d\.]/g, '');
-	var widthG = $('.col-md-8').css('width').replace(/[^-\d\.]/g, '');
-	var heightG = $('.board').css('height').replace(/[^-\d\.]/g, '');
+    var width = $(window).width();
+    var colWidth = $('.col-md-2').css('width').replace(/[^-\d\.]/g, '');
+    var widthG = $('.col-md-8').css('width').replace(/[^-\d\.]/g, '');
+    var heightG = $('.board').css('height').replace(/[^-\d\.]/g, '');
     var drawWidth = $('.board').css('width').replace(/[^-\d\.]/g, '');
     $('.board').css({'height': height});
     $('#draw').css({'width' : drawWidth, 'height' : height});
-	$('.garbage').css({'width' : widthG, 'left' : colWidth+'px'});
-	$('.process').css({'top' : height-100+'px'});
-	$('#simulate').css({'width' : (width/8)+20});
-	$('#create').css({'width' : (width/8)+20});
-	$('.detail').css({'top' : height-200+'px', 'left' : ((widthG/2)-150)+'px'});
-	$(window).resize(function(){
-		$('.board').css('height', height);
+    $('.garbage').css({'width' : widthG, 'left' : colWidth+'px'});
+    $('.process').css({'top' : height-100+'px'});
+    $('#simulate').css({'width' : (width/8)+20});
+    $('#create').css({'width' : (width/8)+20});
+    $('.detail').css({'top' : height-200+'px', 'left' : ((widthG/2)-150)+'px'});
+	addEvent(window, "resize", function(event) {
+		var height = $(window).height();
+        var width = $(window).width();
+        var colWidth = $('.col-md-2').css('width').replace(/[^-\d\.]/g, '');
+        var widthG = $('.col-md-8').css('width').replace(/[^-\d\.]/g, '');
+        var heightG = $('.board').css('height').replace(/[^-\d\.]/g, '');
+        var drawWidth = $('.board').css('width').replace(/[^-\d\.]/g, '');
+        $('.board').css({'height': height});
         $('#draw').css({'width' : drawWidth, 'height' : height});
-		$('.garbage').css({'width' : widthG, 'left' : colWidth+'px'});
-		$('.process').css({'top' : height-100+'px'});
-		$('#simulate').css({'width' : (width/8)+20});
-		$('#create').css({'width' : (width/8)+20});
+        $('.garbage').css({'width' : widthG, 'left' : colWidth+'px'});
+        $('.process').css({'top' : height-100+'px'});
+        $('#simulate').css({'width' : (width/8)+20});
+        $('#create').css({'width' : (width/8)+20});
+        $('.detail').css({'top' : height-200+'px', 'left' : ((widthG/2)-150)+'px'});
 	});
 }
 //////////////////////////////////////////////////////////////

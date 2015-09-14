@@ -30,6 +30,7 @@ $(document).ready(function(){
         $(this).draggable({
             containment:'document',
             snap: $(this),
+            snapMode: 'outer',
             start:function(){
                 $('.garbage').animate({
                     top: "0px"
@@ -112,8 +113,7 @@ $(document).ready(function(){
                 }else if($(ui.draggable).hasClass('outputContain')){   // (output drop case 2/4) = InputItem 내부의 outputItem이 보드로 드롭될 때
                     $(ui.draggable).detach().appendTo('#draw');
                     $(ui.draggable).removeClass('outputContain');
-                    //mouseBoxX와 mouseBoxY 좌표를 재설정 할 필요 있어서 뺐음
-                    $(ui.draggable).css({'left':(mouseX)+'px', 'top':mouseY+'px'});
+                    $(ui.draggable).css({'left':(mouseX)+'px', 'top':(mouseY)+'px'});
                 }
             }
             
