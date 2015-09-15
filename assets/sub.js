@@ -87,12 +87,11 @@ function outputIntoInput(inputNumber,outputNumber){
             }
         }
     
-        if(outputObject.inputItem.getID() != -1){
+        /*if(outputObject.inputItem.getID() != -1){
             if(outputObject.inputItem.getID() != inputArr[index].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
                 outputOutInput(outputObject.inputItem.getID(),outputObject.getID());    // 기존의 A InputItem에서 해당되는 OutputItem 제거
-                prompt("aa"+outputObject.inputItem.getID()+"/"+outputObject.getID());
             }
-        }
+        }*/
     
         outputObject.inputItem = inputArr[index];
         inputArr[index].outputList[inputArr[index].outputList.length] = outputObject;
