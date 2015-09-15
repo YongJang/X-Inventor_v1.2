@@ -63,8 +63,71 @@ $(document).on('mousemove', '.item', function(event,position){
 		mouseBoxY=event.pageY-offset.top;
 });
 //////////////////////////////////////////////////////////////
-    
 
+function outputIntoInput(inputNumber,outputNumber){
+        index = 0;
+        for(var i = 0; i<inputArr.length;i++){
+            if(inputArr[i].getID() == inputNumber){
+                index = i;
+                break;
+            }
+        }
+        
+        outputObject = new Object();
+        for(var i =0; i<outputArr.length;i++){
+            if(outputArr[i].getID() == outputNumber){
+                outputObject = outputArr[i];
+                break;
+            }
+        }
+    
+        for(var i = 0; i<inputArr[index].outputList.length; i++){
+            if(inputArr[index].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+                return;
+            }
+        }
+    
+        if(outputObject.inputItem.getID() != -1){
+            if(outputObject.inputItem.getID() != inputArr[index].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
+                outputOutInput(outputObject.inputItem.getID(),outputObject.getID());    // 기존의 A InputItem에서 해당되는 OutputItem 제거
+                prompt("aa"+outputObject.inputItem.getID()+"/"+outputObject.getID());
+            }
+        }
+    
+        outputObject.inputItem = inputArr[index];
+        inputArr[index].outputList[inputArr[index].outputList.length] = outputObject;
+       
+         str="";                         //실험코드
+                    for(var i =0; i<inputArr[inputNumber].outputList.length;i++){//실험코드
+                        str+=inputArr[inputNumber].outputList[i].text+"/"+inputArr[inputNumber].outputList[i].getID()+"  ";//실험코드
+                    }                               //실험코드
+                    prompt(str);                    //실험코드
+}
+    
+function outputOutInput(inputNumber,outputNumber){
+        index = 0;
+        for(var i = 0; i<inputArr.length;i++){
+            if(inputArr[i].getID() == inputNumber){
+                index = i;
+                break;
+            }
+        }
+        
+        outputObject = new OutputItem();
+        for(var i =0; i<outputArr.length;i++){
+            if(outputArr[i].getID() == outputNumber){
+                outputObject = outputArr[i];
+                break;
+            }
+        }
+        
+        for(var i = 0; i<inputArr[index].outputList.length; i++){
+            if(inputArr[index].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+                inputArr[index].outputList.splice(i,1);
+                return;
+            }
+        }
+}
 
 
 
@@ -212,7 +275,7 @@ function createObjByID(ID){	//
 ///////////////////////객체 정보///////////////////////////////////
 /////////////////////////부모 클래스///////////////////////////////
 function InputItem(){
-			this.id=0;
+			this.id=-1;
             this.text="default";
 			this.getID = function(){
 				return this.id;
@@ -227,8 +290,8 @@ function InputItem(){
 	};
 	
 	function OutputItem(){
-		this.InputItem = new Object();
-		this.id=0;
+		this.inputItem = new InputItem();
+		this.id=-1;
         this.text="default";
 		this.getID = function(){
 			return this.id;

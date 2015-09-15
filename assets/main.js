@@ -21,6 +21,11 @@ $(document).ready(function(){
 		accept: ".outputItem, .inputItem",
 		tolerance:"touch",
 		drop:function(event, ui){
+            tempOutID = $(ui.draggable).attr("id");
+            tempOutID = tempOutID.substring(6,tempOutID.length);
+            tempInID = $(ui.draggable).parent().attr("id");
+            tempInID = tempInID.substring(5,tempInID.length); 
+            outputOutInput(tempInID,tempOutID);
 			$(ui.draggable).remove();			
 		}
 	});
@@ -78,16 +83,15 @@ $(document).ready(function(){
                         $(document).find('#output'+object.getID()).detach().addClass('outputContain').appendTo(this);
                         tempOutID = object.getID();  //실험코드
                     }
-                    inputArr[tempInID].outputList.push(outputArr[tempOutID]);    //실험코드
-                    str="";                         //실험코드
-                    for(var i =0; i<inputArr[tempInID].outputList.length;i++){//실험코드
-                        str+=inputArr[tempInID].outputList[i].text+"/"+inputArr[tempInID].outputList[i].getID()+"  ";//실험코드
-                    }                               //실험코드
-                    prompt(str);                    //실험코드
+                   outputIntoInput(tempInID,tempOutID);   // inputItem ID가 tempInID 인 객체에게 outputItem ID가 tempOutID인 OutputItem 을 전달
                 }
             }
         });
     });
+    
+    
+    
+    
     
     
 	$('.board').droppable({        // 보드 드롭 이벤트
@@ -111,7 +115,12 @@ $(document).ready(function(){
                     outputArr[object.getID()] = object;
                     $(document).find('#output'+object.getID()).css({'left':(mouseX-mouseBoxX)+'px', 'top':mouseY-mouseBoxY+'px'});
                 }else if($(ui.draggable).hasClass('outputContain')){   // (output drop case 2/4) = InputItem 내부의 outputItem이 보드로 드롭될 때
+                    tempOutID = $(ui.draggable).attr("id");
+                    tempOutID = tempOutID.substring(6,tempOutID.length);
+                    tempInID = $(ui.draggable).parent().attr("id");
+                    tempInID = tempInID.substring(5,tempInID.length); 
                     $(ui.draggable).detach().appendTo('#draw');
+                    outputOutInput(tempInID,tempOutID);
                     $(ui.draggable).removeClass('outputContain');
                     $(ui.draggable).css({'left':(mouseX)+'px', 'top':(mouseY)+'px'});
                 }
