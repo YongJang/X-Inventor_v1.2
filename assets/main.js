@@ -62,7 +62,8 @@ $(document).ready(function(){
             },
             stack:".board"
         });
-        $("[id^='input']").droppable({   // input Item 드롭 이벤트
+        // input Item 드롭 이벤트
+        $("[id^='input']").droppable({   
             accept: '.output',
             greedy: true,
             drop:function(event,ui){
@@ -83,7 +84,7 @@ $(document).ready(function(){
                         $(document).find('#output'+object.getID()).detach().addClass('outputContain').appendTo(this);
                         tempOutID = object.getID();  //실험코드
                     }
-                   outputIntoInput(tempInID,tempOutID);   // inputItem ID가 tempInID 인 객체에게 outputItem ID가 tempOutID인 OutputItem 을 전달
+                    outputIntoInput(tempInID,tempOutID);   // inputItem ID가 tempInID 인 객체에게 outputItem ID가 tempOutID인 OutputItem 을 전달
                 }
             }
         });

@@ -66,22 +66,22 @@ $(document).on('mousemove', '.item', function(event,position){
 
 function outputIntoInput(inputNumber,outputNumber){
         index = 0;
-        for(var i = 0; i<inputArr.length;i++){
+        for(var i in inputArr){
             if(inputArr[i].getID() == inputNumber){
                 index = i;
                 break;
             }
         }
-        
+        console.log("inputNumber : "+inputNumber+" inputID : "+index);
         outputObject = new Object();
-        for(var i =0; i<outputArr.length;i++){
+        for(var i in outputArr){
             if(outputArr[i].getID() == outputNumber){
                 outputObject = outputArr[i];
                 break;
             }
         }
     
-        for(var i = 0; i<inputArr[index].outputList.length; i++){
+        for(var i in inputArr[index].outputList){
             if(inputArr[index].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
                 return;
             }
@@ -97,15 +97,15 @@ function outputIntoInput(inputNumber,outputNumber){
         inputArr[index].outputList[inputArr[index].outputList.length] = outputObject;
        
          str="";                         //실험코드
-                    for(var i =0; i<inputArr[inputNumber].outputList.length;i++){//실험코드
-                        str+=inputArr[inputNumber].outputList[i].text+"/"+inputArr[inputNumber].outputList[i].getID()+"  ";//실험코드
-                    }                               //실험코드
-                    prompt(str);                    //실험코드
+        for(var i in inputArr[inputNumber].outputList){//실험코드
+            str+=inputArr[inputNumber].outputList[i].text+"/"+inputArr[inputNumber].outputList[i].getID()+"  ";//실험코드
+        }                               //실험코드
+        prompt(str);                    //실험코드
 }
     
 function outputOutInput(inputNumber,outputNumber){
         index = 0;
-        for(var i = 0; i<inputArr.length;i++){
+        for(var i in inputArr){
             if(inputArr[i].getID() == inputNumber){
                 index = i;
                 break;
@@ -113,14 +113,14 @@ function outputOutInput(inputNumber,outputNumber){
         }
         
         outputObject = new OutputItem();
-        for(var i =0; i<outputArr.length;i++){
+        for(var i in outputArr){
             if(outputArr[i].getID() == outputNumber){
                 outputObject = outputArr[i];
                 break;
             }
         }
         
-        for(var i = 0; i<inputArr[index].outputList.length; i++){
+        for(var i in inputArr[index].outputList){
             if(inputArr[index].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
                 inputArr[index].outputList.splice(i,1);
                 return;
