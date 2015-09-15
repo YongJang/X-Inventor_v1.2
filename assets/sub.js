@@ -72,6 +72,7 @@ function outputIntoInput(inputNumber,outputNumber){
                 break;
             }
         }
+        /**/
         console.log("inputNumber : "+inputNumber+" inputID : "+index);
         outputObject = new Object();
         for(var i in outputArr){
@@ -187,8 +188,8 @@ function detailOutPrint(text){
     }
 }
 
-inputNum = 0;   //input+inputNum = input객체의 ID
-outputNum = 0;  //output+outputNum = output객체의 ID
+inputNum = 1;   //input+inputNum = input객체의 ID
+outputNum = 1;  //output+outputNum = output객체의 ID
 
 // ID 값을 매개변수로 받으면 오브젝트를 생성하는 함수
 function createObjByID(ID){	//
@@ -273,19 +274,20 @@ function createObjByID(ID){	//
 
 ///////////////////////객체 정보///////////////////////////////////
 /////////////////////////부모 클래스///////////////////////////////
+//id가 -1이면 생성이 안되었다는 뜻.
 function InputItem(){
-			this.id=-1;
-            this.text="default";
-			this.getID = function(){
-				return this.id;
-			};
-			this.setID = function(id){
-				this.id = id;
-			};
-			this.outputList = new Array();
-            this.draw = function(){
-                 $("#draw").append("<div id = 'input"+this.id+"'  class='item intput inputItem'><label>"+this.text+"</label></div>");
-            };
+        this.id=-1;
+        this.text="default";
+        this.getID = function(){
+            return this.id;
+        };
+        this.setID = function(id){
+            this.id = id;
+        };
+        this.outputList = new Array();
+        this.draw = function(){
+             $("#draw").append("<div id = 'input"+this.id+"'  class='item intput inputItem'><label>"+this.text+"</label></div>");
+        };
 	};
 	
 	function OutputItem(){

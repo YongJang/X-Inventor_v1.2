@@ -37,12 +37,8 @@ $(document).ready(function(){
             snap: $(this),
             snapMode: 'outer',
             start:function(){
-                $('.garbage').animate({
-                    top: "0px"
-                }, 175);
-                $('.board').animate({
-                    top: "50px"
-                }, 175);
+                $('.garbage').animate({top: "0px"}, 175);
+                $('.board').animate({top: "50px"}, 175);
             },
             drag:function(){
                 if(mouseY<100){
@@ -52,13 +48,8 @@ $(document).ready(function(){
                 }
             },
             stop:function(){
-                $('.garbage').animate({
-                    top: "-50px",
-                    height: "50px"
-                }, 175);
-                $('.board').animate({
-                    top: "0px"
-                }, 175);
+                $('.garbage').animate({top: "-50px", height: "50px"}, 175);
+                $('.board').animate({top: "0px"}, 175);
             },
             stack:".board"
         });
