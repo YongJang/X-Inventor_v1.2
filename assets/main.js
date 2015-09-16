@@ -25,7 +25,7 @@ $(document).ready(function(){
             tempOutID = tempOutID.substring(6,tempOutID.length);
             tempInID = $(ui.draggable).parent().attr("id");
             tempInID = tempInID.substring(5,tempInID.length); 
-            outputOutInput(tempInID,tempOutID);
+            if(tempInID>0) outputOutInput(tempInID,tempOutID);
 			$(ui.draggable).remove();			
 		}
 	});

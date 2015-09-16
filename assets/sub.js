@@ -55,78 +55,51 @@ var mouseBoxX;  //item 박스 내에서의 위치
 var mouseBoxY;
 
 $(document).on('mousemove', '.item', function(event,position){
-        mouseX = event.pageX;
-        mouseY = event.pageY;
-    
-		var offset = $(this).offset();
-		mouseBoxX=event.pageX-offset.left;
-		mouseBoxY=event.pageY-offset.top;
+    mouseX = event.pageX;
+    mouseY = event.pageY;
+
+    var offset = $(this).offset();
+    mouseBoxX=event.pageX-offset.left;
+    mouseBoxY=event.pageY-offset.top;
 });
 //////////////////////////////////////////////////////////////
 
 function outputIntoInput(inputNumber,outputNumber){
-        index = 0;
-        for(var i in inputArr){
-            if(inputArr[i].getID() == inputNumber){
-                index = i;
-                break;
-            }
+    outputObject = new Object();
+    outputObject = outputArr[outputNumber];
+
+    for(var i in inputArr[inputNumber].outputList){
+        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+            return;
         }
-        /**/
-        console.log("inputNumber : "+inputNumber+" inputID : "+index);
-        outputObject = new Object();
-        for(var i in outputArr){
-            if(outputArr[i].getID() == outputNumber){
-                outputObject = outputArr[i];
-                break;
-            }
+    }
+
+    if(outputObject.inputItem.getID() != -1){
+        if(outputObject.inputItem.getID() != inputArr[inputNumber].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
+            outputOutInput(outputObject.inputItem.getID(),outputObject.getID());    // 기존의 A InputItem에서 해당되는 OutputItem 제거
         }
-    
-        for(var i in inputArr[index].outputList){
-            if(inputArr[index].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
-                return;
-            }
-        }
-    
-        /*if(outputObject.inputItem.getID() != -1){
-            if(outputObject.inputItem.getID() != inputArr[index].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
-                outputOutInput(outputObject.inputItem.getID(),outputObject.getID());    // 기존의 A InputItem에서 해당되는 OutputItem 제거
-            }
-        }*/
-    
-        outputObject.inputItem = inputArr[index];
-        inputArr[index].outputList[inputArr[index].outputList.length] = outputObject;
-       
-         str="";                         //실험코드
-        for(var i in inputArr[inputNumber].outputList){//실험코드
-            str+=inputArr[inputNumber].outputList[i].text+"/"+inputArr[inputNumber].outputList[i].getID()+"  ";//실험코드
-        }                               //실험코드
-        prompt(str);                    //실험코드
+    }
+    console.log(outputObject.inputItem);
+    outputObject.inputItem = inputArr[inputNumber];
+    inputArr[inputNumber].outputList[inputArr[inputNumber].outputList.length] = outputObject;
+
+    str="";                         //실험코드
+    for(var i in inputArr[inputNumber].outputList){//실험코드
+        str+=inputArr[inputNumber].outputList[i].text+"/"+inputArr[inputNumber].outputList[i].getID()+"  ";//실험코드
+    }                               //실험코드
+    prompt(str);                    //실험코드
 }
     
-function outputOutInput(inputNumber,outputNumber){
-        index = 0;
-        for(var i in inputArr){
-            if(inputArr[i].getID() == inputNumber){
-                index = i;
-                break;
-            }
+function outputOutInput(inputNumber,outputNumber){        
+    outputObject = new OutputItem();
+    outputObject = outputArr[outputNumber];
+    
+    for(var i in inputArr[inputNumber].outputList){
+        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+            inputArr[inputNumber].outputList.splice(i,1);
+            return;
         }
-        
-        outputObject = new OutputItem();
-        for(var i in outputArr){
-            if(outputArr[i].getID() == outputNumber){
-                outputObject = outputArr[i];
-                break;
-            }
-        }
-        
-        for(var i in inputArr[index].outputList){
-            if(inputArr[index].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
-                inputArr[index].outputList.splice(i,1);
-                return;
-            }
-        }
+    }
 }
 
 
@@ -188,89 +161,89 @@ function detailOutPrint(text){
     }
 }
 
-inputNum = 1;   //input+inputNum = input객체의 ID
-outputNum = 1;  //output+outputNum = output객체의 ID
+inputNum = 0;   //input+inputNum = input객체의 ID
+outputNum = 0;  //output+outputNum = output객체의 ID
 
 // ID 값을 매개변수로 받으면 오브젝트를 생성하는 함수
 function createObjByID(ID){	//
-		var object;
-		select = $(document).find('#'+ID);
-		if(select.hasClass('item')){	// item이 맞는지 확인
-			
-			if(select.hasClass('input')){	// input Item 생성
-				
-				if(ID == "I0"){		// Brightness
-                    Brightness.prototype = new InputItem();
-					object = new Brightness();
-				}else if(ID == "I1"){		// Length
-                    Length.prototype = new InputItem();
-					object = new Length();
-				}else if(ID == "I2"){
-                    Compass.prototype = new InputItem();
-                    object = new Compass();
-                }else if(ID == "I3"){
-                    Heartbeat.prototype = new InputItem();
-                    object = new Heartbeat();
-                }else if(ID == "I4"){
-                    Sound.prototype = new InputItem();
-                    object = new Sound();
-                }else if(ID == "I5"){
-                    Time.prototype = new InputItem();
-                    object = new Time();
-                }else if(ID == "I6"){
-                    Rotation.prototype = new InputItem();
-                    object = new Rotation();
-                }else if(ID == "I7"){
-                    Color.prototype = new InputItem();
-                    object = new Color();
-                }else if(ID == "I8"){
-                    Acceleration.prototype = new InputItem();
-                    object = new Acceleration();
-                }else if(ID == "I9"){
-                    Slope.prototype = new InputItem();
-                    object = new Slope();
-                }else if(ID == "I10"){
-                    Humidity.prototype = new InputItem();
-                    object = new Humidity();
-                }else{
-                    Temperature.prototype = new InputItem();
-                    object = new Temperature();
-                }
-				object.setID(inputNum++);
-			}else{	// output Item 생성
-                if(ID == "O0"){
-                    Speaker.prototype = new OutputItem();
-                    object = new Speaker();
-                }else if(ID == "O1"){
-                    Movement.prototype = new OutputItem();
-                    object = new Movement();
-                }else if(ID == "O2"){
-                    Light.prototype = new OutputItem();
-                    object = new Light();
-                }else if(ID == "O3"){
-                    Vibration.prototype = new OutputItem();
-                    object = new Vibration();
-                }else if(ID == "O4"){
-                    SaveData.prototype = new OutputItem();
-                    object = new SaveData();
-                }else if(ID == "O5"){
-                    HA.prototype = new OutputItem();
-                    object = new HA();
-                }else if(ID == "O6"){
-                    Waterpump.prototype = new OutputItem();
-                    object = new Waterpump();
-                }else if(ID == "O7"){
-                    Display.prototype = new OutputItem();
-                    object = new Display();
-                }else{
-                    Heater.prototype = new OutputItem();
-                    object = new Heater();
-                }
-				object.setID(outputNum++);
-			}
-		}else{return ""}	// error
-		return object;
-	}
+    var object;
+    select = $(document).find('#'+ID);
+    if(select.hasClass('item')){	// item이 맞는지 확인
+
+        if(select.hasClass('input')){	// input Item 생성
+
+            if(ID == "I0"){		// Brightness
+                Brightness.prototype = new InputItem();
+                object = new Brightness();
+            }else if(ID == "I1"){		// Length
+                Length.prototype = new InputItem();
+                object = new Length();
+            }else if(ID == "I2"){
+                Compass.prototype = new InputItem();
+                object = new Compass();
+            }else if(ID == "I3"){
+                Heartbeat.prototype = new InputItem();
+                object = new Heartbeat();
+            }else if(ID == "I4"){
+                Sound.prototype = new InputItem();
+                object = new Sound();
+            }else if(ID == "I5"){
+                Time.prototype = new InputItem();
+                object = new Time();
+            }else if(ID == "I6"){
+                Rotation.prototype = new InputItem();
+                object = new Rotation();
+            }else if(ID == "I7"){
+                Color.prototype = new InputItem();
+                object = new Color();
+            }else if(ID == "I8"){
+                Acceleration.prototype = new InputItem();
+                object = new Acceleration();
+            }else if(ID == "I9"){
+                Slope.prototype = new InputItem();
+                object = new Slope();
+            }else if(ID == "I10"){
+                Humidity.prototype = new InputItem();
+                object = new Humidity();
+            }else{
+                Temperature.prototype = new InputItem();
+                object = new Temperature();
+            }
+            object.setID(inputNum++);
+        }else{	// output Item 생성
+            if(ID == "O0"){
+                Speaker.prototype = new OutputItem();
+                object = new Speaker();
+            }else if(ID == "O1"){
+                Movement.prototype = new OutputItem();
+                object = new Movement();
+            }else if(ID == "O2"){
+                Light.prototype = new OutputItem();
+                object = new Light();
+            }else if(ID == "O3"){
+                Vibration.prototype = new OutputItem();
+                object = new Vibration();
+            }else if(ID == "O4"){
+                SaveData.prototype = new OutputItem();
+                object = new SaveData();
+            }else if(ID == "O5"){
+                HA.prototype = new OutputItem();
+                object = new HA();
+            }else if(ID == "O6"){
+                Waterpump.prototype = new OutputItem();
+                object = new Waterpump();
+            }else if(ID == "O7"){
+                Display.prototype = new OutputItem();
+                object = new Display();
+            }else{
+                Heater.prototype = new OutputItem();
+                object = new Heater();
+            }
+            object.setID(outputNum++);
+        }
+    }else{return ""}	// error
+    return object;
+}
 
 ///////////////////////객체 정보///////////////////////////////////
 /////////////////////////부모 클래스///////////////////////////////
