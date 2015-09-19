@@ -62,48 +62,6 @@ $(document).on('mousemove', '.item', function(event,position){
     mouseBoxX=event.pageX-offset.left;
     mouseBoxY=event.pageY-offset.top;
 });
-//////////////////////////////////////////////////////////////
-
-function outputIntoInput(inputNumber,outputNumber){
-    outputObject = new Object();
-    outputObject = outputArr[outputNumber];
-
-    for(var i in inputArr[inputNumber].outputList){
-        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
-            return;
-        }
-    }
-
-    if(outputObject.inputItem.getID() != -1){
-        if(outputObject.inputItem.getID() != inputArr[inputNumber].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
-            outputOutInput(outputObject.inputItem.getID(),outputObject.getID());    // 기존의 A InputItem에서 해당되는 OutputItem 제거
-        }
-    }
-    console.log(outputObject.inputItem);
-    outputObject.inputItem = inputArr[inputNumber];
-    inputArr[inputNumber].outputList[inputArr[inputNumber].outputList.length] = outputObject;
-
-    str="";                         //실험코드
-    for(var i in inputArr[inputNumber].outputList){//실험코드
-        str+=inputArr[inputNumber].outputList[i].text+"/"+inputArr[inputNumber].outputList[i].getID()+"  ";//실험코드
-    }                               //실험코드
-    prompt(str);                    //실험코드
-}
-    
-function outputOutInput(inputNumber,outputNumber){        
-    outputObject = new OutputItem();
-    outputObject = outputArr[outputNumber];
-    
-    for(var i in inputArr[inputNumber].outputList){
-        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
-            inputArr[inputNumber].outputList.splice(i,1);
-            return;
-        }
-    }
-}
-
-
-
 ////////////////////////////////////////////////////////////
 //detail 함수 // 데이터 저장 xxxxxx
 function detailPrint(text){
@@ -359,3 +317,44 @@ outputArr = new Array();    // OutputItem 클래스들을 저장할 배열
         this.text = "Heater"
     };
 //////////////////////////////////////////////////////////////////////////////////////////
+function outputOutInput(inputNumber,outputNumber){        
+    outputObject = new OutputItem();
+    outputObject = outputArr[outputNumber];
+    for(var i in inputArr[inputNumber].outputList){
+        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+            inputArr[inputNumber].outputList.splice(i,1);
+            return;
+        }
+    }
+}
+
+function outputIntoInput(inputNumber,outputNumber){
+    outputObject = new Object();
+    outputObject = outputArr[outputNumber];
+    for(var i in inputArr[inputNumber].outputList){
+        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+            return;
+        }
+    }
+
+    if(outputObject.inputItem.getID() != -1){
+        if(outputObject.inputItem.getID() != inputArr[inputNumber].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
+            outputOutInput(outputObject.inputItem.getID(),outputObject.getID());    // 기존의 A InputItem에서 해당되는 OutputItem 제거
+        }
+    }
+    outputObject.inputItem = inputArr[inputNumber];
+    inputArr[inputNumber].outputList[inputArr[inputNumber].outputList.length] = outputObject;
+    /*
+    str="";                         //실험코드
+    for(var i in inputArr[inputNumber].outputList){//실험코드
+        str+=inputArr[inputNumber].outputList[i].text+"/"+inputArr[inputNumber].outputList[i].getID()+"  ";//실험코드
+    }                               //실험코드
+    prompt(str);                    //실험코드
+    */
+}
+    
+
+function onBoardDelete(outputNumber){
+    outputObject = new OutputItem();
+    outputObject = outputArr[outputNumber];
+}
