@@ -1,5 +1,6 @@
 $(document).ready(function(){
-
+    
+    $('body').css('overflow','hidden');
 	//Window Size setting
 	sizeSet();
     
