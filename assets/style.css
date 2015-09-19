@@ -38,11 +38,10 @@ body{font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-si
 	color: #f0ad4e;
 }
 .title{
-	margin: 10px;
+	margin: 10px 0 5px 0;
 }
 #glyphicons{
 	padding: 1px;
-	align: center;
 	margin: 0 auto;
 }
 
