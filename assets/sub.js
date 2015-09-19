@@ -19,8 +19,8 @@ function sizeSet(){
     $('#draw').css({'width' : drawWidth, 'height' : height});
     $('.garbage').css({'width' : drawWidth, 'left' : colWidth+'px'});
     $('.process').css({'top' : height-100+'px'});
-    $('#simulate').css({'width' : (width/8)+20});
-    $('#create').css({'width' : (width/8)+20});
+    $('#help').css({'width' : (width/8)+20});
+    $('#next').css({'width' : (width/8)+20});
     $('.detail').css({'top' : height-200+'px', 'left' : ((widthG/2)-150)+'px'});
 	addEvent(window, "resize", function(event) {
 		var height = $(window).height();
@@ -33,8 +33,8 @@ function sizeSet(){
         $('#draw').css({'width' : drawWidth, 'height' : height});
         $('.garbage').css({'width' : widthG, 'left' : (colWidth)+'px'});
         $('.process').css({'top' : height-100+'px'});
-        $('#simulate').css({'width' : (width/8)+20});
-        $('#create').css({'width' : (width/8)+20});
+        $('#help').css({'width' : (width/8)+20});
+        $('#next').css({'width' : (width/8)+20});
         $('.detail').css({'top' : height-200+'px', 'left' : ((widthG/2)-150)+'px'});
 	});
 }
