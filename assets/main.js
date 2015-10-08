@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+$(document).ready(function(){
     
     $('body').css('overflow','hidden');
 	//Window Size setting
@@ -21,13 +21,41 @@
 		accept: ".outputItem, .inputItem",
 		tolerance:"touch",
 		drop:function(event, ui){
-            tempOutID = $(ui.draggable).attr("id");
-            tempOutID = tempOutID.substring(6,tempOutID.length);
-            tempInID = $(ui.draggable).parent().attr("id");
-            tempInID = tempInID.substring(5,tempInID.length); 
-            if(tempInID>0) 
-                outputOutInput(tempInID,tempOutID);
+            
+            var tempInID;
+            var tempOutID;
+           
+            if($(ui.draggable).hasClass("inputItem")){
+                tempInID = $(ui.draggable).attr("id");
+                tempInID = tempInID.substring(5,tempInID.length);
+                inputDeleteFromArray(tempInID);
+            }
+            
+            if($(ui.draggable).hasClass("outputItem")){
+                tempOutID = $(ui.draggable).attr("id");
+                tempOutID = tempOutID.substring(6,tempOutID.length);
+                if($(ui.draggable).parent().hasClass("inputItem")){
+                    tempInID = $(ui.draggable).parent().attr("id");
+                    tempInID = tempInID.substring(5,tempInID.length);
+                }
+            }
+            
+            
+            
+             
+            if(tempInID>=0){
+                if(tempOutID!=null)
+                    outputOutInput(tempInID,tempOutID);
+            }
 			$(ui.draggable).remove();
+            /*
+            str="";
+            for(var i=0; i<inputArr.length;i++){
+                str=str+inputArr[i].getID()+"/"+inputArr[i].text+"//";
+            }
+            prompt(str);
+            */
+            
 		}
 	});
 
@@ -87,12 +115,11 @@
                     }else if(!$(ui.draggable).hasClass('outputItem')){  // (output drop case 4/4) = 아이템 리스트에 있던 output이 inputItem으로 바로 드롭될 때
                         object = createObjByID(objID);
                         object.draw();
-                        outputArr[object.getID()] = object;
+                        outputArr[outputArr.length] = object;
                         $(document).find('#output'+object.getID()).detach().addClass('outputContain').appendTo(this);
                         outNumID = object.getID();  //실험코드
                     }
                     outputIntoInput(inNumID,outNumID);   // inputItem ID가 tempInID 인 객체에게 outputItem ID가 tempOutID인 OutputItem 을 전달
-                    
                 }
             }
         });
@@ -109,14 +136,14 @@
                 if(!$(ui.draggable).hasClass('inputItem')){ // 이미 보드에 드롭되어 있는 엘리먼트라면 또 다시 보드에 드롭되어 객체가 생성되지 못하게끔 예외로 처리
                     object = createObjByID(objID);  // createObjByID 에게 drag 되는 대상의 id를 매개변수로 넘겨주고 그 대상을 객체화 하여 object라는 변수에 저장
                     object.draw();                  // 객체를 보드 상에 그리는 함수
-                    inputArr[object.getID()] = object;  // InputItem을 저장해 놓는 배열에 생성한 InputItem 저장
+                    inputArr[inputArr.length] = object;  // InputItem을 저장해 놓는 배열에 생성한 InputItem 저장
                     $(document).find('#input'+object.getID()).css({'left':(mouseX-mouseBoxX)+'px', 'top':mouseY-mouseBoxY+'px'});
                 }
             }else if($(ui.draggable).hasClass('output')){   // item이 output일 때
                 if(!$(ui.draggable).hasClass('outputItem')){    // (output drop case 1/4) = 아이템 리스트에서 보드로 드롭
                     object = createObjByID(objID);
                     object.draw();
-                    outputArr[object.getID()] = object;
+                    outputArr[outputArr.length] = object;
                     $(document).find('#output'+object.getID()).css({'left':(mouseX-mouseBoxX)+'px', 'top':mouseY-mouseBoxY+'px'});
                 }else if($(ui.draggable).hasClass('outputContain')){   // (output drop case 2/4) = InputItem 내부의 outputItem이 보드로 드롭될 때
                     tempOutID = $(ui.draggable).attr("id");

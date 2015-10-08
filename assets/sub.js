@@ -320,10 +320,12 @@ outputArr = new Array();    // OutputItem 클래스들을 저장할 배열
 function outputOutInput(inputNumber,outputNumber){        
     outputObject = new OutputItem();
     outputObject = outputArr[outputNumber];
-    for(var i in inputArr[inputNumber].outputList){
-        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
-            inputArr[inputNumber].outputList.splice(i,1);
-            return;
+    if(inputArr[inputNumber]!=null){
+        for(var i in inputArr[inputNumber].outputList){
+            if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+                inputArr[inputNumber].outputList.splice(i,1);
+                return;
+            }
         }
     }
 }
@@ -331,19 +333,36 @@ function outputOutInput(inputNumber,outputNumber){
 function outputIntoInput(inputNumber,outputNumber){
     outputObject = new Object();
     outputObject = outputArr[outputNumber];
-    for(var i in inputArr[inputNumber].outputList){
-        if(inputArr[inputNumber].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
-            return;
+    var tmp = -1;
+    
+    for(var i=0; i<inputArr.length;i++){
+        if(inputNumber == inputArr[i].getID()){
+            tmp = i;
+            break;
         }
     }
+    
+    if(tmp == -1){
+        //prompt("there is no "+inputNumber+" in inputArr Array");
+        return;
+    }
+    for(var i=0;i<inputArr[tmp].outputList.length;i++){
+        
+        if(inputArr[tmp].outputList[i].getID() == outputObject.getID()){  //이미 InputItem 안에 같은 ID의 OutputItem이 있는 경우
+             return;
+        }
+    }
+    
 
     if(outputObject.inputItem.getID() != -1){
-        if(outputObject.inputItem.getID() != inputArr[inputNumber].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
+        if(outputObject.inputItem.getID() != inputArr[tmp].getID()){  // A라는 InputItem에 있는 OutputItem이 바로 B라는 InputItem에 드롭되는 경우
             outputOutInput(outputObject.inputItem.getID(),outputObject.getID());    // 기존의 A InputItem에서 해당되는 OutputItem 제거
         }
     }
-    outputObject.inputItem = inputArr[inputNumber];
-    inputArr[inputNumber].outputList[inputArr[inputNumber].outputList.length] = outputObject;
+    outputObject.inputItem = inputArr[tmp];
+    
+    inputArr[tmp].outputList[inputArr[tmp].outputList.length] = outputObject;
+    
     /*
     str="";                         //실험코드
     for(var i in inputArr[inputNumber].outputList){//실험코드
@@ -351,6 +370,19 @@ function outputIntoInput(inputNumber,outputNumber){
     }                               //실험코드
     prompt(str);                    //실험코드
     */
+}
+
+function inputDeleteFromArray(inputID){     // inputArr 배열에서 ID가 inputID인 inputItem을 찾아서 제거
+    tmp = -1;
+    for(var i=0;i<inputArr.length;i++){
+        if(inputID == inputArr[i].getID()){
+            tmp = i;
+            break;
+        }
+    }
+    
+    inputArr.splice(tmp,1);
+    
 }
     
 
