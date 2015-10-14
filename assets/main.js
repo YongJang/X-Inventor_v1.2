@@ -29,7 +29,13 @@ $(document).ready(function(){
                 tempInID = $(ui.draggable).attr("id");
                 tempInID = tempInID.substring(5,tempInID.length);
                 inputDeleteFromArray(tempInID);
+                if(ui.draggable.children().hasClass("outputToggle")){
+                        $('.detail').find('tr').remove();
+                        $(ui.draggable).removeClass('outputToggle');
+                }
             }
+            
+            
             
             if($(ui.draggable).hasClass("outputItem")){
                 tempOutID = $(ui.draggable).attr("id");
@@ -37,6 +43,10 @@ $(document).ready(function(){
                 if($(ui.draggable).parent().hasClass("inputItem")){
                     tempInID = $(ui.draggable).parent().attr("id");
                     tempInID = tempInID.substring(5,tempInID.length);
+                }
+                if(ui.draggable.hasClass("outputToggle")){
+                        $('.detail').find('tr').remove();
+                        $(ui.draggable).removeClass('outputToggle');
                 }
             }
             
@@ -58,7 +68,8 @@ $(document).ready(function(){
             
 		}
 	});
-
+    
+ 
 
     $(document).on("mouseenter","[id^='input'],[id^='output']",function(){  // id가 input이나 output으로 시작하는 모든 엘리먼트들에게 mouseenter이 발생했을 때 실시간으로 draggable 속성 부여
         $(this).draggable({
@@ -153,7 +164,10 @@ $(document).ready(function(){
                     $(ui.draggable).detach().appendTo('#draw');
                     outputOutInput(tempInID, tempOutID);
                     $(ui.draggable).removeClass('outputContain');
-                    $(ui.draggable).removeClass('outputToggle');
+                    if(ui.draggable.hasClass("outputToggle")){
+                        $('.detail').find('tr').remove();
+                        $(ui.draggable).removeClass('outputToggle');
+                    }
                     $(ui.draggable).css({'left':(mouseX)+'px', 'top':(mouseY)+'px'});
                 }
             }            
@@ -231,6 +245,8 @@ $(document).ready(function(){
                 });
         });
     });
+    
+
 	
 });
 
