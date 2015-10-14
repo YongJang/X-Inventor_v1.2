@@ -153,6 +153,7 @@ $(document).ready(function(){
                     $(ui.draggable).detach().appendTo('#draw');
                     outputOutInput(tempInID, tempOutID);
                     $(ui.draggable).removeClass('outputContain');
+                    $(ui.draggable).removeClass('outputToggle');
                     $(ui.draggable).css({'left':(mouseX)+'px', 'top':(mouseY)+'px'});
                 }
             }            
@@ -167,7 +168,7 @@ $(document).ready(function(){
 	});
     
      $(document).on("click",".outputContain",function(ui){ 
-								$(this).parent().parent().find('div').removeClass("outputToggle");
+								$(".outputToggle").removeClass("outputToggle");
 								detailInput = $(this).parent().text();
 								detailInput = detailInput.substring(1,detailInput.length);
          detailInputID = $(this).parent().attr("id");
