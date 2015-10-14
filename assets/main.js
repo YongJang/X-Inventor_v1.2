@@ -165,6 +165,71 @@ $(document).ready(function(){
 		var $btn = $(this).button('loading');
 		$btn.button('reset');
 	});
+    
+     $(document).on("click",".outputContain",function(ui){ 
+								$(this).parent().parent().find('div').removeClass("outputToggle");
+								detailInput = $(this).parent().text();
+								detailInput = detailInput.substring(1,detailInput.length);
+         detailInputID = $(this).parent().attr("id");
+         detailInputID = detailInputID.substring(5,detailInputID.length);
+         temp1=0;
+         for(var i = 0; i<inputArr.length;i++){
+             if(inputArr[i].getID() == detailInputID)
+                 temp1 = i;
+         }
+         
+								var io = detailInput.indexOf(" ");
+								detailInput = detailInput.substring(0,io);
+         
+         
+								
+								$(this).toggleClass("outputToggle",1,function(){
+									detailOutput = $(this).text();
+                                    detailOutputID = $(this).attr("id");
+                                    detailOutputID = detailOutputID.substring(6,detailOutputID.length);
+                                    temp2 = 0;
+                                    for(var i =0; i<inputArr[temp1].outputList.length;i++){
+                                        if(inputArr[temp1].outputList[i].getID() == detailOutputID)
+                                            temp2 = i;
+                                    }
+									var text;
+									text = detailPrint(inputArr[temp1].text);
+									text = text+detailOutPrint(inputArr[temp1].outputList[temp2].text);
+									$('.detail').find('tr').remove();
+									$('.detail table').append(text);		
+									//prompt($("#sel option").length);
+									var idx;
+									var text2="";
+									$(document).on('change', '#sel', function(){
+										idx = $("#sel option").length - $("#sel option:selected").index();
+										
+											$('.detailContent #R').each(function(){
+												$(this).remove();
+											});
+											$('.detailContent #L').each(function(){
+												$(this).remove();
+											});
+											$('.detailContent #A').each(function(){
+												$(this).remove();
+											});
+										text2="";
+										switch(idx){
+											case 3: 
+												text2='<!-- Rotating --><tr id="R"><th><label>| Torque</label></th><td class="selector"><div class="input-group input-group-lg">											<input name="length" type="text" class="form-control" placeholder="0">                        	    			<span class="input-group-addon">kgf·cm</span>                        	    			</div>										</td>									</tr>									<tr id="R">										<th><label>| Rotating speed</label></th>										<td class="selector">											<div class="input-group input-group-lg">										<input name="length" type="text" class="form-control" placeholder="0">                        	    			<span class="input-group-addon">rpm</span>                        	    			</div>										</td>									</tr>									<tr id="R">										<th><label>| Direction</label></th>										<td class="selector">											<select class="form-control input-lg">                   				        		<option value="1">One</option>                  				      			<option value="2">Both</option>											</select>										</td>									</tr>									<tr id="R">										<th><label>| Angle controllable</label></th>										<td class="selector">											<select class="form-control input-lg">                 				        		<option value="1">Yes</option>                  				      			<option value="2">No</option>											</select>										</td>									</tr>';
+												break;
+											case 2:
+												text2='<!-- Linear --><tr id="L"><th><label>| Force</label></th><td class="selector"><div class="input-group input-group-lg">								<input name="length" type="text" class="form-control" placeholder="0"><span class="input-group-addon">N</span>            	    			</div></td>						</tr>					<tr id="L">							<th><label>| Linear speed</label></th><td class="selector">								<div class="input-group input-group-lg">								<input name="length" type="text" class="form-control" placeholder="0"><span class="input-group-addon">cm/s</span>           	    			</div>							</td>						</tr>						<tr id="L">							<th><label>| Actuating length</label></th>							<td class="selector">								<div class="input-group input-group-lg">								<input name="length" type="text" class="form-control" placeholder="0">            	    			<span class="input-group-addon">cm</span>            	    			</div>							</td>						</tr>						<tr id="L">							<th><label>| Length resolution</label></th>							<td class="selector">								<div class="input-group input-group-lg">								<input name="length" type="text" class="form-control" placeholder="0">            	    			<span class="input-group-addon">cm</span>            	    			</div>							</td>						</tr>';
+												break;
+											case 1:
+												text2='<!-- Angle --><tr id="A"><th><label>| Torque</label></th><td class="selector"><div class="input-group input-group-lg">													<input name="length" type="text" class="form-control" placeholder="0">		                        	    			<span class="input-group-addon">kgf·cm</span>		                        	    			</div>												</td>											</tr>											<tr id="A">												<th><label>| Angular speed</label></th>											<td class="selector">													<div class="input-group input-group-lg">													<input name="length" type="text" class="form-control" placeholder="0">		                        	    			<span class="input-group-addon">º/s</span>		                        	    			</div>												</td>											</tr>											<tr id="A">												<th><label>| Actuating angle</label></th>												<td class="selector">													<div class="input-group input-group-lg">													<input name="length" type="text" class="form-control" placeholder="0">		                        	    			<span class="input-group-addon">º</span>		                        	    			</div>												</td>											</tr>											<tr id="A">												<th><label>| Angle resolution</label></th>												<td class="selector">													<div class="input-group input-group-lg">													<input name="length" type="text" class="form-control" placeholder="0">		                        	    			<span class="input-group-addon">º</span>		                        	    			</div>												</td>											</tr>';
+												break;
+											default:
+												break;
+										}
+										$('.detail table').append(text2);
+                });
+        });
+    });
 	
 });
 

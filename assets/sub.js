@@ -95,23 +95,23 @@ function detailPrint(text){
     }
 }
 function detailOutPrint(text){
-    if(text === " Movement"){
+    if(text === "Movement"){
         return "<tr>										<th><label>| Movement type</label></th>										<td class='selector'>											<select class='form-control input-lg' id='sel'>												<option value=''></option>                   				        		<option value='R'>Rotating</option>                   				      			<option value='L'>Linear</option>                   				      			<option value='A'>Angle</option>											</select>										</td>									</tr>";
-    }else if(text === " Light"){
+    }else if(text === "Light"){
         return "<tr>										<th><label>| Actuating light</label></th>										<td class='selector'>											<select class='form-control input-lg'>												<option value='></option>                   				        		<option value='0'>Bulb</option>                   				      			<option value='1'>Candle</option>                   				      			<option value='2'>Halogen</option>                   				      			<option value='3'>Neon</option>                   				      			<option value='4'>Lamp</option>                   				      			<option value='5'>Lighter</option>											</select>										</td>									</tr>";
-    }else if(text === " Speaker"){
+    }else if(text === "Speaker"){
         return "<tr>										<th><label>| Actuating loudness</label></th>										<td class='selector'>											<div class='input-group input-group-lg'>											<input name='length' type='text' class='form-control' placeholder='0'>                        	    			<span class='input-group-addon'>dB</span>                        	    			</div>										</td>									</tr>									<tr>										<th><label>| Loudness resolution</label></th>										<td class='selector'>											<div class='input-group input-group-lg'>											<input name='length' type='text' class='form-control' placeholder='0'>                        	    			<span class='input-group-addon'>dB</span>                        	    			</div>										</td>									</tr>									<tr>										<th><label>| Actuating frequency</label></th>										<td class='selector'>											<div class='input-group input-group-lg'>											<input name='length' type='text' class='form-control' placeholder='0'>                        	    			<span class='input-group-addon'>Hz</span>                        	    			</div>										</td>									</tr>									<tr>										<th><label>| Frequency resolution</label></th>										<td class='selector'>											<div class='input-group input-group-lg'>											<input name='length' type='text' class='form-control' placeholder='0'>                        	    			<span class='input-group-addon'>Hz</span>                        	    			</div>										</td>									</tr>";
-    }else if(text === " Vibration"){
+    }else if(text === "Vibration"){
         return "<tr>										<th><label>| Intensity</label></th>										<td class='selector'>											<select class='form-control input-lg'>                   				        		<option value='0'>High</option>                   				      			<option value='1'>Middle</option>                   				      			<option value='2'>Low</option>											</select>										</td>									</tr>";
-    }else if(text === " Save Data"){
+    }else if(text === "Save Data"){
         return "<tr>										<th><label>| Data type</label></th>										<td class='selector'>											<select class='form-control input-lg'>                   				        		<option value='0'>txt</option>                   				      			<option value='1'>Excel</option>                   				      			<option value='2'>Image</option>                   				      			<option value='3'>Video</option>											</select>										</td>									</tr>";
-    }else if(text === " H A"){
+    }else if(text === "HA"){
         return "";
-    }else if(text === " Waterpump"){
+    }else if(text === "Waterpump"){
         return "<tr>										<th><label>| Flow</label></th>										<td class='selector'>											<div class='input-group input-group-lg'>											<input name='length' type='text' class='form-control' placeholder='0'>                        	    			<span class='input-group-addon'>㎖/s</span>                        	    			</div>										</td>									</tr>";
-    }else if(text === " Display"){
+    }else if(text === "Display"){
         return "<tr>										<th><label>| Display type</label></th>										<td class='selector'>											<select class='form-control input-lg'>                   				        		<option value='0'>Text</option>                   				      			<option value='1'>Image</option>                   				      			<option value='2'>Video</option>											</select>										</td>									</tr>";
-    }else if(text === " Heater"){
+    }else if(text === "Heater"){
         return "<tr>										<th><label>| Actuating temperature</label></th>										<td class='selector'>											<div class='input-group input-group-lg'>											<input name='length' type='text' class='form-control' placeholder='0'>                        	    			<span class='input-group-addon'>~</span>              <input name='length' type='text' class='form-control' placeholder='0'>          	<span class='input-group-addon'>ºC</span>    			</div>										</td>									</tr>									<tr>										<th><label>| Heat power</label></th>										<td class='selector'>											<div class='input-group input-group-lg'>											<input name='length' type='text' class='form-control' placeholder='0'>                        	    			<span class='input-group-addon'>W</span>                        	    			</div>										</td>									</tr>";
     }
     else{

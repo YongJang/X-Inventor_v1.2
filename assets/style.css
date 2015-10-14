@@ -65,7 +65,7 @@ body{font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-si
 
 .output:hover{
 	border-radius: 5px;
-	background: #f0ad4e;
+	background: #ffff66;
 	-webkit-transition: background .5s;
 	-moz-transition: background .5s;
 	-o-transition: background .5s;
@@ -131,6 +131,7 @@ body{font-family:'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;font-si
 	cursor: pointer;
 }
 .detail{
+    padding: 10px;
 	box-shadow: 3px 3px 10px #000000;
 	background-color: #6d5595;
 	border-radius: 5px;
